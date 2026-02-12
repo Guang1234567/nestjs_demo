@@ -1,0 +1,29 @@
+# Project Instructions
+
+## Core Technology Stack
+- **Framework**: NestJS (^11.0.1)
+- **Language**: TypeScript (^5.7.3) with **Strict Mode** enabled.
+- **Package Manager**: **pnpm**. ALWAYS use `pnpm` for any dependency management or script execution.
+
+## Coding Standards & Best Practices
+
+### 1. Data Structures (DTOs & Entities)
+- **Rule**: ALWAYS use **Classes** instead of Interfaces for DTOs (Data Transfer Objects) and Database Entities.
+- **Rationale**: Classes are preserved in compiled JavaScript (ES6 standard), allowing NestJS (and libraries like `class-validator`/`class-transformer`) to access metatypes at runtime. Interfaces are erased during transpilation and cannot be used for runtime validation or reflection (e.g., by Pipes).
+
+### 2. Architecture
+- Follow **Modular Architecture**: Group related components (Controllers, Services, Modules) into feature-based directories.
+- Leverage **Dependency Injection**: Use constructor-based injection for providers.
+
+### 3. Validation & Transformation
+- Use `class-validator` and `class-transformer` decorators within DTO classes to enforce data integrity and transformation.
+
+## Development Rules
+- **Playground Files**: ALL experimental or demonstration code MUST be located in the `.playground/` directory at the root. DO NOT pollute the `src/` or project root with temporary files.
+- **Formatting**: Adhere to Prettier config (single quotes, trailing commas: "all"). Run `pnpm run format` to ensure consistency.
+- **Linting**: No ESLint errors allowed. Run `pnpm run lint` to check code quality.
+
+## Common Commands
+- Start Dev Server: `pnpm run start:dev`
+- Build for Production: `pnpm run build`
+- Run Tests: `pnpm run test`

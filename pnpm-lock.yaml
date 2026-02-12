@@ -14,6 +14,9 @@ importers:
       '@nestjs/core':
         specifier: ^11.0.1
         version: 11.1.13(@nestjs/common@11.1.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/platform-express@11.1.13)(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      '@nestjs/mapped-types':
+        specifier: ^2.1.0
+        version: 2.1.0(@nestjs/common@11.1.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(reflect-metadata@0.2.2)
       '@nestjs/platform-express':
         specifier: ^11.0.1
         version: 11.1.13(@nestjs/common@11.1.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.13)
@@ -23,6 +26,9 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: 7.8.2
+      uuid:
+        specifier: ^13.0.0
+        version: 13.0.0
     devDependencies:
       '@eslint/eslintrc':
         specifier: ^3.2.0
@@ -682,6 +688,19 @@ packages:
       '@nestjs/platform-express':
         optional: true
       '@nestjs/websockets':
+        optional: true
+
+  '@nestjs/mapped-types@2.1.0':
+    resolution: {integrity: sha512-W+n+rM69XsFdwORF11UqJahn4J3xi4g/ZEOlJNL6KoW5ygWSmBB2p0S2BZ4FQeS/NDH72e6xIcu35SfJnE8bXw==, tarball: https://registry.npmjs.org/@nestjs/mapped-types/-/mapped-types-2.1.0.tgz}
+    peerDependencies:
+      '@nestjs/common': ^10.0.0 || ^11.0.0
+      class-transformer: ^0.4.0 || ^0.5.0
+      class-validator: ^0.13.0 || ^0.14.0
+      reflect-metadata: ^0.1.12 || ^0.2.0
+    peerDependenciesMeta:
+      class-transformer:
+        optional: true
+      class-validator:
         optional: true
 
   '@nestjs/platform-express@11.1.13':
@@ -2857,6 +2876,10 @@ packages:
   util-deprecate@1.0.2:
     resolution: {integrity: sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw==, tarball: https://registry.npmjs.org/util-deprecate/-/util-deprecate-1.0.2.tgz}
 
+  uuid@13.0.0:
+    resolution: {integrity: sha512-XQegIaBTVUjSHliKqcnFqYypAd4S+WCYt5NIeRs6w/UAry7z8Y9j5ZwRRL4kzq9U3sD6v+85er9FvkEaBpji2w==, tarball: https://registry.npmjs.org/uuid/-/uuid-13.0.0.tgz}
+    hasBin: true
+
   v8-compile-cache-lib@3.0.1:
     resolution: {integrity: sha512-wa7YjyUGfNZngI/vtK0UHAN+lgDCxBPCylVXGp0zu59Fz5aiGtNXaq3DhIov063MorB+VfufLh3JlF2KdTK3xg==, tarball: https://registry.npmjs.org/v8-compile-cache-lib/-/v8-compile-cache-lib-3.0.1.tgz}
 
@@ -3718,6 +3741,11 @@ snapshots:
       uid: 2.0.2
     optionalDependencies:
       '@nestjs/platform-express': 11.1.13(@nestjs/common@11.1.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.13)
+
+  '@nestjs/mapped-types@2.1.0(@nestjs/common@11.1.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(reflect-metadata@0.2.2)':
+    dependencies:
+      '@nestjs/common': 11.1.13(reflect-metadata@0.2.2)(rxjs@7.8.2)
+      reflect-metadata: 0.2.2
 
   '@nestjs/platform-express@11.1.13(@nestjs/common@11.1.13(reflect-metadata@0.2.2)(rxjs@7.8.2))(@nestjs/core@11.1.13)':
     dependencies:
@@ -6116,6 +6144,8 @@ snapshots:
       punycode: 2.3.1
 
   util-deprecate@1.0.2: {}
+
+  uuid@13.0.0: {}
 
   v8-compile-cache-lib@3.0.1: {}
 
