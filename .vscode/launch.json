@@ -1,0 +1,35 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "pnpm start:debug",
+      "type": "node",
+      "request": "launch",
+      // internalConsole: Forces Trae to redirect all `stdout/stderr` to the "vscode's Terminal" tab
+      "console": "integratedTerminal",
+      "runtimeArgs": ["run", "start:debug"],
+      "runtimeExecutable": "pnpm",
+      "skipFiles": ["<node_internals>/**"],
+      "autoAttachChildProcesses": true,
+    },
+    {
+      "name": "Attach to Localhost",
+      "type": "node",
+      "request": "attach",
+      "port": 9229,
+      "skipFiles": ["<node_internals>/**"],
+      "autoAttachChildProcesses": true,
+    },
+    {
+      "name": "Attach to Remote",
+      "address": "127.0.0.1",
+      "localRoot": "${workspaceFolder}",
+      "port": 9229,
+      "remoteRoot": "127.0.0.1:3000",
+      "request": "attach",
+      "skipFiles": ["<node_internals>/**"],
+      "type": "node",
+      "autoAttachChildProcesses": true,
+    }
+  ]
+}

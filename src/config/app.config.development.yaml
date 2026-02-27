@@ -4,3 +4,7 @@ http:
 auth:
   isEnabled: true
 
+module:
+  cats:
+    isEnabled: true
+

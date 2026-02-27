@@ -1,13 +1,24 @@
 import { Module } from '@nestjs/common';
-import { AppConfigModule } from './config/app.config';
+import { AppConfigModule, useImport } from './config/app.config';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { CatsController } from './cats/cats.controller';
-import { CatsService } from './cats/cats.service';
+import { CatsModule } from './cats/cats.module';
 
 @Module({
-  imports: [AppConfigModule],
-  controllers: [AppController, CatsController],
-  providers: [AppService, CatsService],
+  imports: [
+    AppConfigModule,
+    // CatsModule,
+    useImport(async (/* appConfig: AppConfig, */ env: NodeJS.ProcessEnv) => {
+      return env['USE_MODULE_CATS'] === 'true'
+        ? {
+            module: CatsModule,
+          }
+        : {
+            module: CatsModule,
+          };
+    }),
+  ],
+  controllers: [AppController],
+  providers: [AppService],
 })
 export class AppModule {}

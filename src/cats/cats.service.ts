@@ -12,7 +12,15 @@ export class Cat {
 
 @Injectable()
 export class CatsService {
-  private readonly cats: Cat[] = [];
+  private readonly cats: Cat[] = [
+    { id: uuidv4(), name: 'Tom', age: 7, breed: 'Persian' },
+    { id: uuidv4(), name: 'Jerry', age: 5, breed: 'Siamese' },
+    { id: uuidv4(), name: 'Luna', age: 3, breed: 'Maine Coon' },
+    { id: uuidv4(), name: 'Oliver', age: 4, breed: 'Ragdoll' },
+    { id: uuidv4(), name: 'Leo', age: 2, breed: 'Bengal' },
+    { id: uuidv4(), name: 'Milo', age: 6, breed: 'Sphynx' },
+    { id: uuidv4(), name: 'Chloe', age: 1, breed: 'British Shorthair' },
+  ];
 
   create(createCatDto: CreateCatDto): Cat {
     const newCat: Cat = {
