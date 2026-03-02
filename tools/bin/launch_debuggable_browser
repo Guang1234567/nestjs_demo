@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+# 模拟 asdf shim 风格的脚本封装
+# 该脚本用于在 *nix 环境下转发参数并执行对应的 TypeScript 脚本
+
+set -e
+
+# 获取脚本所在的目录
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# TS 脚本现在在 ../script/ 目录下
+TS_SCRIPT_PATH="$( cd "$SCRIPT_DIR/../script" && pwd )/launch_debuggable_browser.ts"
+
+# 检查 pnpm 是否安装
+if ! command -v pnpm &> /dev/null; then
+    echo "[Error] pnpm could not be found. Please install it first."
+    exit 1
+fi
+
+# 使用 exec 替换当前进程，完美转发所有参数 ($@)
+exec pnpm jiti "$TS_SCRIPT_PATH" "$@"

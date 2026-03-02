@@ -1,0 +1,61 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "task: launch:browser",
+      "type": "process",
+      "command": "pnpm",
+      "args": [
+        "run",
+        "launch:browser",
+        "--browser=${input:args_browser}",
+        "--path=${input:args_path}",
+      /* "--port=${input:args_debugPort}",
+        "--url=${input:args_dev_url}",
+        "--port=9900",
+        "--mode=development", */
+      ],
+      "isBackground": false,
+      "problemMatcher": {
+        "owner": "custom",
+        "pattern": { "regexp": "^.*$" },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*\\[Browser\\] Waiting.*",
+          "endsPattern": ".*\\[Browser\\] (Started|Debug port .* is already active).*"
+        }
+      },
+      "presentation": {
+        "reveal": "never",
+        "panel": "dedicated",
+        "close": true,
+        "showReuseMessage": false,
+        "clear": true
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "id": "args_browser",
+      "type": "pickString",
+      "description": "Select browser",
+      "options": ["chrome", "msedge"],
+      "default": "chrome"
+    },
+    {
+      "id": "args_path",
+      "type": "command",
+      "command": "extension.commandvariable.pickStringRemember",
+      "args": {
+        "key": "browser_path_history_list", // 存储多条记录的 Key
+        "description": "Select or enter the relative path (type for new path)",
+        "default": "/",
+        "options": [
+          "/",
+          "/cats",
+          "/dogs",
+        ]
+      }
+    }
+  ]
+}

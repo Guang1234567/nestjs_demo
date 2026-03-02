@@ -11,6 +11,21 @@
       "runtimeExecutable": "pnpm",
       "skipFiles": ["<node_internals>/**"],
       "autoAttachChildProcesses": true,
+      "serverReadyAction": {
+        "pattern": ".*Nest application successfully started.*",
+        "action": "startDebugging",
+        "name": "Launch Browser Task"
+      }
+    },
+    {
+      "name": "Launch Browser Task",
+      "type": "node",
+      "request": "launch",
+      "runtimeArgs": ["-e", "process.exit(0)"],
+      "preLaunchTask": "task: launch:browser",
+      "presentation": {
+        "hidden": true
+      }
     },
     {
       "name": "Attach to Localhost",

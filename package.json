@@ -20,7 +20,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json",
     "watch:format": "onchange \"src/**/*.ts\" \"test/**/*.ts\" -- prettier --write {{changed}}",
     "start:dev:watch:format": "run-p start:dev watch:format",
-    "prepare": "husky"
+    "prepare": "husky",
+    "launch:browser": "jiti tools/script/launch_debuggable_browser.ts"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
@@ -42,11 +43,13 @@
     "@nestjs/testing": "^11.0.1",
     "@swc/cli": "^0.8.0",
     "@swc/core": "^1.15.17",
+    "@tsconfig/node22": "^22.0.5",
     "@types/express": "^5.0.0",
     "@types/jest": "^30.0.0",
     "@types/js-yaml": "^4.0.9",
     "@types/node": "^22.10.7",
     "@types/supertest": "^6.0.2",
+    "commander": "^14.0.3",
     "cross-env": "^10.1.0",
     "eslint": "^9.18.0",
     "eslint-config-prettier": "^10.0.1",
