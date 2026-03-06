@@ -1,5 +1,12 @@
 {
     "recommendations": [
-        "rioj7.command-variable"
+        "rioj7.command-variable",
+        "alefragnani.bookmarks",
+        "codeinchinese.englishchinesedictionary",
+        "darkcwk.youdao",
+        "intellsmi.comment-translate",
+        "kanin-020.vscode-proxy-manager",
+        "wlnxingdev.free-senltig",
+        "donjayamanne.githistory"
     ]
 }

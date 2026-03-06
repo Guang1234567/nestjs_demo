@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateCatDto } from './create-cat.dto';
 import { UpdateCatDto } from './update-cat.dto';
+import { BussinessLoggerService } from '@/logger/bussiness-logger.service';
 
 export class Cat {
   id: string;
@@ -12,6 +13,10 @@ export class Cat {
 
 @Injectable()
 export class CatsService {
+  constructor(private readonly logger: BussinessLoggerService) {
+    this.logger.log('CatsService instance created');
+  }
+
   private readonly cats: Cat[] = [
     { id: uuidv4(), name: 'Tom', age: 7, breed: 'Persian' },
     { id: uuidv4(), name: 'Jerry', age: 5, breed: 'Siamese' },
@@ -31,6 +36,16 @@ export class CatsService {
     return newCat;
   }
 
+  update(id: string, updateCatDto: UpdateCatDto): Cat {
+    const index = this.cats.findIndex((cat) => cat.id === id);
+    if (index === -1) {
+      throw new NotFoundException(`Cat with ID ${id} not found`);
+    }
+    const updatedCat = { ...this.cats[index], ...updateCatDto };
+    this.cats[index] = updatedCat;
+    return updatedCat;
+  }
+
   findAll(): Cat[] {
     return this.cats;
   }
@@ -45,16 +60,6 @@ export class CatsService {
       throw new NotFoundException(`Cat with ID ${id} not found`);
     }
     return cat;
-  }
-
-  update(id: string, updateCatDto: UpdateCatDto): Cat {
-    const index = this.cats.findIndex((cat) => cat.id === id);
-    if (index === -1) {
-      throw new NotFoundException(`Cat with ID ${id} not found`);
-    }
-    const updatedCat = { ...this.cats[index], ...updateCatDto };
-    this.cats[index] = updatedCat;
-    return updatedCat;
   }
 
   remove(id: string): void {

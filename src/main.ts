@@ -1,14 +1,26 @@
 import { NestFactory } from '@nestjs/core';
-import { Logger } from '@nestjs/common';
 import { AppModule } from './app.module';
 import { AppService } from './app.service';
 import { AppConfig, AppEnvironment } from './config/app.config';
+import { BussinessLoggerService } from './logger/bussiness-logger.service';
+import { Logger as NestInternalLogger } from '@nestjs/common';
+import { LoggerModule } from './logger/logger.module';
 
 async function bootstrap() {
-  const logger = new Logger('Bootstrap', { timestamp: true });
-  logger.warn('Starting application...');
-
   const app = await NestFactory.create(AppModule, { abortOnError: false });
+
+  const nestInternalLogger = await LoggerModule.resolvedBy(
+    app,
+    NestInternalLogger,
+  );
+  app.useLogger(nestInternalLogger);
+  app.flushLogs();
+
+  const bussinessLogger = await LoggerModule.resolvedBy(
+    app,
+    BussinessLoggerService,
+  );
+  bussinessLogger.warn('Starting application...');
 
   const appService = app.get(AppService);
   const nodeEnv: AppEnvironment = appService.nodeEnv;
@@ -16,6 +28,8 @@ async function bootstrap() {
 
   await app.listen(appConfig.port);
 
-  logger.warn(`Application (${nodeEnv}) is running on: ${await app.getUrl()}`);
+  bussinessLogger.warn(
+    `Application (${nodeEnv}) is running on: ${await app.getUrl()}`,
+  );
 }
-bootstrap();
+bootstrap().catch((err) => NestInternalLogger.fatal(err));
